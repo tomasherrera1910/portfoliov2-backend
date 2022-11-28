@@ -1,11 +1,14 @@
+import * as dotenv from 'dotenv'
+dotenv.config()
 import express from 'express'
+import { dbConnect } from './database/connect'
+import projectsRouter from './routes/projects'
 
+dbConnect()
 const app = express()
 app.use(express.json()) //bodyparser
 
-app.get('/server-status', (req, res) => {
-    res.json({"status": 'ok'})
-})
+app.use(projectsRouter)
 
 const PORT = process.env.PORT || 3001
 app.listen(PORT, () => {
