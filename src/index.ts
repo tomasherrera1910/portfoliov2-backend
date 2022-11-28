@@ -3,7 +3,7 @@ import express from 'express'
 const app = express()
 app.use(express.json()) //bodyparser
 
-app.get('/status', (req, res) => {
+app.get('/server-status', (req, res) => {
     res.json({"status": 'ok'})
 })
 
