@@ -1,13 +1,43 @@
 import { Router } from 'express'
+import { createProject, deleteProject, editProject, getProject, getProjects } from '../services/projectsService'
 
 const projectsRouter = Router()
 
-projectsRouter.get('/projects', async (req, res) => {
-  res.send('ALL THE PROJECTS !!')
+projectsRouter.get('/projects', (req, res, next) => {
+  getProjects()
+    .then(projects => res.json(projects))
+    .catch(e => next(e))
 })
-projectsRouter.get('/projects/:id', async (req, res) => {})
-projectsRouter.post('/projects', async (req, res) => {})
-projectsRouter.put('/projects/:id', async (req, res) => {})
-projectsRouter.delete('/projects/:id', async (req, res) => {})
+projectsRouter.get('/projects/:id', (req, res, next) => {
+  const { id } = req.params
+  getProject(+id)
+    .then(project => res.json(project))
+    .catch(e => next(e))
+})
+projectsRouter.post('/projects', (req, res, next) => {
+  const { name, description, image, backendRepo, frontendRepo, deployURL } = req.body
+  createProject({
+    name,
+    description,
+    image,
+    backendRepo,
+    frontendRepo,
+    deployURL
+  })
+    .then(newProject => res.status(201).json(newProject))
+    .catch(e => next(e))
+})
+projectsRouter.put('/projects/:id', (req, res, next) => {
+  const { id } = req.params
+  editProject(+id, req.body)
+    .then(projectUpdated => res.status(202).json(projectUpdated))
+    .catch(e => next(e))
+})
+projectsRouter.delete('/projects/:id', (req, res, next) => {
+  const { id } = req.params
+  deleteProject(+id)
+    .then(() => res.status(204).end())
+    .catch(e => next(e))
+})
 
 export default projectsRouter
