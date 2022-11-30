@@ -4,7 +4,8 @@ import { dbConnect } from './database/connect'
 import projectsRouter from './routes/projects'
 dotenv.config()
 
-dbConnect().catch(e => console.error(e))
+dbConnect()
+  .catch(e => console.error(e))
 
 const app = express()
 app.use(express.json()) // bodyparser
