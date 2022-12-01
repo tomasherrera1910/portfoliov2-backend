@@ -8,10 +8,12 @@ export const Skill = sequelize.define('Skill', {
     autoIncrement: true
   },
   name: {
-    type: DataTypes.STRING
+    type: DataTypes.STRING,
+    allowNull: false
   },
   imageURL: {
-    type: DataTypes.STRING
+    type: DataTypes.STRING,
+    allowNull: false
   },
   technology: {
     type: DataTypes.STRING
@@ -19,3 +21,8 @@ export const Skill = sequelize.define('Skill', {
 }, {
   timestamps: false
 })
+
+// const syncChanges = async (): Promise<void> => {
+//   await Skill.sync()
+// }
+// syncChanges().catch(e => console.error(e))

@@ -15,7 +15,8 @@ export const Project = sequelize.define('Project', {
     type: DataTypes.STRING
   },
   image: {
-    type: DataTypes.STRING
+    type: DataTypes.STRING,
+    allowNull: false
   },
   backendRepo: {
     type: DataTypes.STRING
@@ -24,11 +25,12 @@ export const Project = sequelize.define('Project', {
     type: DataTypes.STRING
   },
   deployURL: {
-    type: DataTypes.STRING
+    type: DataTypes.STRING,
+    allowNull: false
   }
 })
 
-// const syncChanges = async() => {
-//     await Project.sync()
+// const syncChanges = async (): Promise<void> => {
+//   await Project.sync()
 // }
-// syncChanges()
+// syncChanges().catch(e => console.error(e))
