@@ -1,9 +1,7 @@
-import * as dotenv from 'dotenv'
+import './dotenv/config'
 import express from 'express'
 import { dbConnect } from './database/connect'
 import projectsRouter from './routes/projects'
-
-dotenv.config()
 
 dbConnect()
   .catch(e => console.error(e))
