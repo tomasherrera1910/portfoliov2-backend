@@ -9,3 +9,12 @@ export interface IProject {
 }
 
 export type ProjectNoID = Omit<IProject, 'id'>
+
+export interface ISkill {
+  id: number
+  name: string
+  imageURL: string
+  technology: string
+}
+
+export type SkillNoID = Omit <ISkill, 'id'>

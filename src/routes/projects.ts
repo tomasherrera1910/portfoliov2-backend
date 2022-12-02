@@ -11,7 +11,11 @@ projectsRouter.get('/projects', (req, res, next) => {
 projectsRouter.get('/projects/:id', (req, res, next) => {
   const { id } = req.params
   getProject(+id)
-    .then(project => res.json(project))
+    .then(project => {
+      project !== null
+        ? res.json(project)
+        : res.status(404).json({ error: 'Project not found' })
+    })
     .catch(e => next(e))
 })
 projectsRouter.post('/projects', (req, res, next) => {
