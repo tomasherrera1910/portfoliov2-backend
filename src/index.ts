@@ -1,5 +1,7 @@
-import './dotenv/config'
+import './config/dotenv'
 import express from 'express'
+import cors from 'cors'
+import corsOptions from './config/corsOptions'
 import { dbConnect } from './database/connect'
 import projectsRouter from './routes/projects'
 import skillsRouter from './routes/skills'
@@ -9,6 +11,7 @@ dbConnect()
   .catch(e => console.error(e))
 
 const app = express()
+app.use(cors(corsOptions))
 app.use(express.json()) // bodyparser
 
 // Routes
