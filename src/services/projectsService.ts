@@ -1,8 +1,16 @@
 import { Project } from '../models/Project'
+import { Skill } from '../models/Skill'
+import '../models/ProjectsTechnologies'
 import { IProject, ProjectNoID } from '../types'
 
 export async function getProjects (): Promise<any> {
-  return await Project.findAll({})
+  return await Project.findAll({
+    include: {
+      model: Skill,
+      as: 'technologies',
+      attributes: ['name', 'imageURL', 'technology', 'id']
+    }
+  })
 }
 
 export async function getProject (id: number): Promise<any> {

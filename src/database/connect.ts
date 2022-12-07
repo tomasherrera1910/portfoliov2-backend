@@ -1,6 +1,6 @@
 import sequelize from './index'
 
-export const dbConnect = async (): Promise<void> => {
+const dbConnect = async (): Promise<void> => {
   try {
     await sequelize.authenticate()
     console.log('DB CONNECTED')
@@ -8,3 +8,6 @@ export const dbConnect = async (): Promise<void> => {
     console.error(error)
   }
 }
+
+dbConnect()
+  .catch(e => console.error(e))
