@@ -21,14 +21,16 @@ projectsRouter.get('/projects/:id', (req, res, next) => {
 })
 // CREATE PROJECT
 projectsRouter.post('/projects', (req, res, next) => {
-  const { name, description, image, backendRepo, frontendRepo, deployURL } = req.body
+  const { name, description, image, backendRepo, frontendRepo, deployURL, colors } = req.body
   createProject({
     name,
     description,
     image,
     backendRepo,
     frontendRepo,
-    deployURL
+    deployURL,
+    technologies: [],
+    colors
   })
     .then(newProject => res.status(201).json(newProject))
     .catch(e => next(e))

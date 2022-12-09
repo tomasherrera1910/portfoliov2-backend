@@ -18,6 +18,9 @@ export const Project = sequelize.define('Project', {
     type: DataTypes.STRING,
     allowNull: false
   },
+  colors: {
+    type: DataTypes.ARRAY(DataTypes.STRING)
+  },
   backendRepo: {
     type: DataTypes.STRING
   },

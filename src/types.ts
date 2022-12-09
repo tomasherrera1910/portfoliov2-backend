@@ -6,6 +6,8 @@ export interface IProject {
   backendRepo?: string
   frontendRepo?: string
   deployURL: string
+  colors: string[]
+  technologies: ISkill[]
 }
 
 export type ProjectNoID = Omit<IProject, 'id'>
@@ -17,4 +19,4 @@ export interface ISkill {
   technology: string
 }
 
-export type SkillNoID = Omit <ISkill, 'id'>
+export type SkillNoID = Omit<ISkill, 'id'>
