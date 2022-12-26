@@ -5,7 +5,7 @@ const { DATABASE_NAME, DATABASE_USER, DATABASE_PASSWORD, DATABASE_PORT } = proce
 
 const sequelize = new Sequelize(DATABASE_NAME!, DATABASE_USER!, DATABASE_PASSWORD, {
   port: Number(DATABASE_PORT)!,
-  dialect: 'mysql'
+  dialect: 'postgres'
 })
 
 export default sequelize
