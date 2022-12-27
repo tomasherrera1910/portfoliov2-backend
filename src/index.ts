@@ -6,6 +6,7 @@ import './database/connect'
 import projectsRouter from './routes/projects'
 import skillsRouter from './routes/skills'
 import ProjectsTechnologiesRouter from './routes/projectsTechnologies'
+import usersRouter from './routes/users'
 import handleErrors from './middlewares/handleErrors'
 
 const app = express()
@@ -16,6 +17,7 @@ app.use(express.json()) // bodyparser
 app.use(projectsRouter)
 app.use(skillsRouter)
 app.use(ProjectsTechnologiesRouter)
+app.use(usersRouter)
 // Handle Errors
 app.use(handleErrors)
 

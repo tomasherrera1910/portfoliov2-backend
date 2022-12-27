@@ -20,3 +20,11 @@ export interface ISkill {
 }
 
 export type SkillNoID = Omit<ISkill, 'id'>
+
+export interface IUser {
+  id: number
+  username: string
+  email: string
+  password: string
+}
+export type UserNoID = Omit<IUser, 'id'>
