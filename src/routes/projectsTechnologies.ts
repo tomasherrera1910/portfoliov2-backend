@@ -1,9 +1,10 @@
 import { Router } from 'express'
+import verifyUser from '../middlewares/verifyUser'
 import { createProjectSkillRelation, deleteProjectSkillRelation } from '../services/projectsTechnologiesService'
 const ProjectsTechnologiesRouter = Router()
 
 // CREATE RELATION
-ProjectsTechnologiesRouter.post('/union/project-skill', (req, res, next) => {
+ProjectsTechnologiesRouter.post('/union/project-skill', verifyUser, (req, res, next) => {
   const { projectId, skillId } = req.body
   createProjectSkillRelation(projectId, skillId)
     .then(newUnion => res.status(201).json(newUnion))
@@ -11,7 +12,7 @@ ProjectsTechnologiesRouter.post('/union/project-skill', (req, res, next) => {
 })
 
 // DELETE RELATION
-ProjectsTechnologiesRouter.delete('/union/project-skill/:id', (req, res, next) => {
+ProjectsTechnologiesRouter.delete('/union/project-skill/:id', verifyUser, (req, res, next) => {
   const { id } = req.params
   deleteProjectSkillRelation(+id)
     .then(() => res.status(204).end())

@@ -1,4 +1,5 @@
 import { Router } from 'express'
+import verifyUser from '../middlewares/verifyUser'
 import { createProject, deleteProject, editProject, getProject, getProjects } from '../services/projectsService'
 const projectsRouter = Router()
 
@@ -20,7 +21,7 @@ projectsRouter.get('/projects/:id', (req, res, next) => {
     .catch(e => next(e))
 })
 // CREATE PROJECT
-projectsRouter.post('/projects', (req, res, next) => {
+projectsRouter.post('/projects', verifyUser, (req, res, next) => {
   const { name, description, image, backendRepo, frontendRepo, deployURL, colors } = req.body
   createProject({
     name,
@@ -36,14 +37,14 @@ projectsRouter.post('/projects', (req, res, next) => {
     .catch(e => next(e))
 })
 // EDIT PROJECT
-projectsRouter.put('/projects/:id', (req, res, next) => {
+projectsRouter.put('/projects/:id', verifyUser, (req, res, next) => {
   const { id } = req.params
   editProject(+id, req.body)
     .then(projectUpdated => res.status(202).json(projectUpdated))
     .catch(e => next(e))
 })
 // DELETE PROJECT
-projectsRouter.delete('/projects/:id', (req, res, next) => {
+projectsRouter.delete('/projects/:id', verifyUser, (req, res, next) => {
   const { id } = req.params
   deleteProject(+id)
     .then(() => res.status(204).end())

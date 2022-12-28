@@ -1,4 +1,5 @@
 import { Router } from 'express'
+import verifyUser from '../middlewares/verifyUser'
 import { getSkills, getSkill, createSkill, editSkill, deleteSkill } from '../services/skillsService'
 
 const skillsRouter = Router()
@@ -18,7 +19,7 @@ skillsRouter.get('/skills/:id', (req, res, next) => {
     })
     .catch(e => next(e))
 })
-skillsRouter.post('/skills', (req, res, next) => {
+skillsRouter.post('/skills', verifyUser, (req, res, next) => {
   const { name, imageURL, technology } = req.body
   createSkill({
     name,
@@ -28,13 +29,13 @@ skillsRouter.post('/skills', (req, res, next) => {
     .then(newSkill => res.status(201).json(newSkill))
     .catch(e => next(e))
 })
-skillsRouter.put('/skills/:id', (req, res, next) => {
+skillsRouter.put('/skills/:id', verifyUser, (req, res, next) => {
   const { id } = req.params
   editSkill(+id, req.body)
     .then(skillUpdated => res.status(202).json(skillUpdated))
     .catch(e => next(e))
 })
-skillsRouter.delete('/skills/:id', (req, res, next) => {
+skillsRouter.delete('/skills/:id', verifyUser, (req, res, next) => {
   const { id } = req.params
   deleteSkill(+id)
     .then(() => res.status(204).end())

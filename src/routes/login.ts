@@ -5,13 +5,13 @@ import jwt from 'jsonwebtoken'
 const loginRouter = Router()
 
 loginRouter.post('/login', (async (req, res) => {
-  const { email, password } = req.body
+  const { password } = req.body
   const user: any = await User.findOne({
-    where: { email }
+    where: { email: 'tomymza10@gmail.com' }
   })
   const passwordCorrect = (user != null) ? await bcrypt.compare(password, user.password) : false
   if ((user == null) || !passwordCorrect) {
-    return res.status(401).json({ error: 'El email y/o la contraseña son incorrectos' })
+    return res.status(401).json({ error: 'La clave es incorrecta' })
   }
   const userForToken = { id: user.id, email: user.email }
   const secret: string = process.env.JWT_SECRET ?? ''
