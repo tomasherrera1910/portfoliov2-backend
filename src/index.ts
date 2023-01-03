@@ -2,6 +2,7 @@ import './config/dotenv'
 import express from 'express'
 import cors from 'cors'
 import corsOptions from './config/corsOptions'
+import cookieParser from 'cookie-parser'
 import './database/connect'
 import projectsRouter from './routes/projects'
 import skillsRouter from './routes/skills'
@@ -11,6 +12,7 @@ import handleErrors from './middlewares/handleErrors'
 import loginRouter from './routes/login'
 
 const app = express()
+app.use(cookieParser())
 app.use(cors(corsOptions))
 app.use(express.json()) // bodyparser
 

@@ -18,6 +18,7 @@ loginRouter.post('/login', (async (req, res) => {
   const token = jwt.sign(userForToken, secret, {
     expiresIn: 60 * 60 * 24 * 365
   })
+  res.cookie('token', token)
   return res.status(202).json({ token })
 }) as RequestHandler)
 
