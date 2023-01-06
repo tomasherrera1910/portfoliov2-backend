@@ -23,7 +23,7 @@ loginRouter.post('/login', (async (req, res) => {
   return res.status(202).json({ token })
 }) as RequestHandler)
 
-loginRouter.get('/verifyLogin', verifyUser, (_req, res) => {
+loginRouter.get('/verifyLogin/:token', verifyUser, (_req, res) => {
   return res.json({ login: true })
 })
 export default loginRouter
