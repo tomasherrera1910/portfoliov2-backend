@@ -2,11 +2,8 @@ import { NextFunction, Request, Response } from 'express'
 import jwt, { Secret } from 'jsonwebtoken'
 
 const verifyUser = (req: Request, res: Response, next: NextFunction): void => {
-  console.log(req.cookies())
   try {
-    const token = req.cookies()
-    console.log({ token })
-
+    const token = req.cookies.token ?? req.params.token
     if (token === undefined) {
       throw new Error()
     }
