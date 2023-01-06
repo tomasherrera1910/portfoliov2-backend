@@ -2,6 +2,7 @@ import { Router, RequestHandler } from 'express'
 import { User } from '../models/User'
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
+import verifyUser from '../middlewares/verifyUser'
 const loginRouter = Router()
 
 loginRouter.post('/login', (async (req, res) => {
@@ -22,4 +23,7 @@ loginRouter.post('/login', (async (req, res) => {
   return res.status(202).json({ token })
 }) as RequestHandler)
 
+loginRouter.get('/verifyLogin', verifyUser, (_req, res) => {
+  return res.json({ login: true })
+})
 export default loginRouter
