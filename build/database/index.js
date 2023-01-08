@@ -5,6 +5,6 @@ const sequelize_1 = require("sequelize");
 const { DATABASE_NAME, DATABASE_USER, DATABASE_PASSWORD, DATABASE_PORT } = process.env;
 const sequelize = new sequelize_1.Sequelize(DATABASE_NAME, DATABASE_USER, DATABASE_PASSWORD, {
     port: Number(DATABASE_PORT),
-    dialect: 'mysql'
+    dialect: 'postgres'
 });
 exports.default = sequelize;

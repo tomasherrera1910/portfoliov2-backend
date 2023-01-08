@@ -11,9 +11,17 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.deleteProject = exports.editProject = exports.createProject = exports.getProject = exports.getProjects = void 0;
 const Project_1 = require("../models/Project");
+const Skill_1 = require("../models/Skill");
+require("../models/ProjectsTechnologies");
 function getProjects() {
     return __awaiter(this, void 0, void 0, function* () {
-        return yield Project_1.Project.findAll({});
+        return yield Project_1.Project.findAll({
+            include: {
+                model: Skill_1.Skill,
+                as: 'technologies',
+                attributes: ['name', 'imageURL', 'technology', 'id']
+            }
+        });
     });
 }
 exports.getProjects = getProjects;

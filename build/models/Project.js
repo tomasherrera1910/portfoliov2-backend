@@ -20,7 +20,11 @@ exports.Project = database_1.default.define('Project', {
         type: sequelize_1.DataTypes.STRING
     },
     image: {
-        type: sequelize_1.DataTypes.STRING
+        type: sequelize_1.DataTypes.STRING,
+        allowNull: false
+    },
+    colors: {
+        type: sequelize_1.DataTypes.ARRAY(sequelize_1.DataTypes.STRING)
     },
     backendRepo: {
         type: sequelize_1.DataTypes.STRING
@@ -29,10 +33,11 @@ exports.Project = database_1.default.define('Project', {
         type: sequelize_1.DataTypes.STRING
     },
     deployURL: {
-        type: sequelize_1.DataTypes.STRING
+        type: sequelize_1.DataTypes.STRING,
+        allowNull: false
     }
 });
-// const syncChanges = async() => {
-//     await Project.sync()
+// const syncChanges = async (): Promise<void> => {
+//   await Project.sync()
 // }
-// syncChanges()
+// syncChanges().catch(e => console.error(e))

@@ -1,42 +1,33 @@
 "use strict";
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    var desc = Object.getOwnPropertyDescriptor(m, k);
-    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
-      desc = { enumerable: true, get: function() { return m[k]; } };
-    }
-    Object.defineProperty(o, k2, desc);
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-    __setModuleDefault(result, mod);
-    return result;
-};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 var _a;
 Object.defineProperty(exports, "__esModule", { value: true });
-const dotenv = __importStar(require("dotenv"));
+require("./config/dotenv");
 const express_1 = __importDefault(require("express"));
-const connect_1 = require("./database/connect");
+const cors_1 = __importDefault(require("cors"));
+const corsOptions_1 = __importDefault(require("./config/corsOptions"));
+const cookie_parser_1 = __importDefault(require("cookie-parser"));
+require("./database/connect");
 const projects_1 = __importDefault(require("./routes/projects"));
-dotenv.config();
-(0, connect_1.dbConnect)()
-    .catch(e => console.error(e));
+const skills_1 = __importDefault(require("./routes/skills"));
+const projectsTechnologies_1 = __importDefault(require("./routes/projectsTechnologies"));
+const users_1 = __importDefault(require("./routes/users"));
+const handleErrors_1 = __importDefault(require("./middlewares/handleErrors"));
+const login_1 = __importDefault(require("./routes/login"));
 const app = (0, express_1.default)();
+app.use((0, cookie_parser_1.default)());
+app.use((0, cors_1.default)(corsOptions_1.default));
 app.use(express_1.default.json()); // bodyparser
+// Routes
 app.use(projects_1.default);
+app.use(skills_1.default);
+app.use(projectsTechnologies_1.default);
+app.use(users_1.default);
+app.use(login_1.default);
+// Handle Errors
+app.use(handleErrors_1.default);
 const PORT = (_a = process.env.PORT) !== null && _a !== void 0 ? _a : 3001;
 app.listen(PORT, () => {
     console.log(`server running on port ${PORT}`);

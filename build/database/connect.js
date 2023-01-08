@@ -12,7 +12,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.dbConnect = void 0;
 const index_1 = __importDefault(require("./index"));
 const dbConnect = () => __awaiter(void 0, void 0, void 0, function* () {
     try {
@@ -23,4 +22,5 @@ const dbConnect = () => __awaiter(void 0, void 0, void 0, function* () {
         console.error(error);
     }
 });
-exports.dbConnect = dbConnect;
+dbConnect()
+    .catch(e => console.error(e));
