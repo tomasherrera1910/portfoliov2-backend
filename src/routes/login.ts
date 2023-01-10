@@ -19,7 +19,7 @@ loginRouter.post('/login', (async (req, res) => {
   const token = jwt.sign(userForToken, secret, {
     expiresIn: 60 * 60 * 24 * 365
   })
-  const domain = (process.env.NODE_ENV === 'production') ? 'localhost:3000' : 'localhost' // cuando deploye el front cambiar dominio
+  const domain = (process.env.NODE_ENV === 'production') ? 'portfoliov2-backend-production.up.railway.app' : 'localhost'
   res.cookie('token', token, {
     domain
   })
