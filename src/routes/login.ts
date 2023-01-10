@@ -19,10 +19,10 @@ loginRouter.post('/login', (async (req, res) => {
   const token = jwt.sign(userForToken, secret, {
     expiresIn: 60 * 60 * 24 * 365
   })
-  const domain = (process.env.NODE_ENV === 'production') ? 'portfoliov2-backend-production.up.railway.app' : 'localhost'
+  const domain = 'portfoliov2-backend-production.up.railway.app'
   res.cookie('token', token, {
     domain,
-    sameSite: 'none',
+    sameSite: 'lax',
     secure: true
   })
   return res.status(202).json({ token })
