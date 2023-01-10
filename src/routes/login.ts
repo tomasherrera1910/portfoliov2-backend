@@ -19,9 +19,8 @@ loginRouter.post('/login', (async (req, res) => {
   const token = jwt.sign(userForToken, secret, {
     expiresIn: 60 * 60 * 24 * 365
   })
-  const domain = 'portfoliov2-backend-production.up.railway.app'
+
   res.cookie('token', token, {
-    domain,
     sameSite: 'none'
   })
   return res.status(202).json({ token })
