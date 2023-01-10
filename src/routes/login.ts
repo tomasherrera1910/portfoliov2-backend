@@ -22,8 +22,7 @@ loginRouter.post('/login', (async (req, res) => {
   const domain = 'portfoliov2-backend-production.up.railway.app'
   res.cookie('token', token, {
     domain,
-    sameSite: 'lax',
-    secure: true
+    sameSite: 'none'
   })
   return res.status(202).json({ token })
 }) as RequestHandler)
