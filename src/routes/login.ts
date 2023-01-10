@@ -21,8 +21,8 @@ loginRouter.post('/login', (async (req, res) => {
   })
 
   res.cookie('token', token, {
-    domain: 'localhost:3000',
-    sameSite: 'none'
+    sameSite: 'none',
+    secure: false
   })
   return res.status(202).json({ token })
 }) as RequestHandler)
