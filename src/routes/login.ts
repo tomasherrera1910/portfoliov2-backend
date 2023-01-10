@@ -21,7 +21,9 @@ loginRouter.post('/login', (async (req, res) => {
   })
   const domain = (process.env.NODE_ENV === 'production') ? 'portfoliov2-backend-production.up.railway.app' : 'localhost'
   res.cookie('token', token, {
-    domain
+    domain,
+    sameSite: 'none',
+    secure: true
   })
   return res.status(202).json({ token })
 }) as RequestHandler)
