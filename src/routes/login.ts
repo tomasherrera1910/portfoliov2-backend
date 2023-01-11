@@ -21,9 +21,9 @@ loginRouter.post('/login', (async (req, res) => {
   })
 
   res.cookie('token', token, {
-    sameSite: 'none',
-    secure: false
-  })
+    // sameSite: 'none',
+    // secure: false
+  }) // vamos a dejarlo comentado mientras estemos en desarrollo para no generar mas problemas
   return res.status(202).json({ token })
 }) as RequestHandler)
 
