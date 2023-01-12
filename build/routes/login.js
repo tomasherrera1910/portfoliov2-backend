@@ -33,7 +33,16 @@ loginRouter.post('/login', ((req, res) => __awaiter(void 0, void 0, void 0, func
     const token = jsonwebtoken_1.default.sign(userForToken, secret, {
         expiresIn: 60 * 60 * 24 * 365
     });
-    res.cookie('token', token);
+    const { NODE_ENV } = process.env;
+    if (NODE_ENV === 'production' || NODE_ENV === undefined) {
+        res.cookie('token', token, {
+            sameSite: 'none',
+            secure: false
+        });
+    }
+    else if (NODE_ENV === 'development') {
+        res.cookie('token', token);
+    }
     return res.status(202).json({ token });
 })));
 loginRouter.get('/verifyLogin/:token', verifyUser_1.default, (_req, res) => {

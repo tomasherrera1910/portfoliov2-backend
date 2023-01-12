@@ -19,11 +19,16 @@ loginRouter.post('/login', (async (req, res) => {
   const token = jwt.sign(userForToken, secret, {
     expiresIn: 60 * 60 * 24 * 365
   })
+  const { NODE_ENV } = process.env
+  if (NODE_ENV === 'production' || NODE_ENV === undefined) {
+    res.cookie('token', token, {
+      sameSite: 'none',
+      secure: false
+    })
+  } else if (NODE_ENV === 'development') {
+    res.cookie('token', token)
+  }
 
-  res.cookie('token', token, {
-    // sameSite: 'none',
-    // secure: false
-  }) // vamos a dejarlo comentado mientras estemos en desarrollo para no generar mas problemas
   return res.status(202).json({ token })
 }) as RequestHandler)
 
