@@ -13,6 +13,7 @@ exports.deleteProject = exports.editProject = exports.createProject = exports.ge
 const Project_1 = require("../models/Project");
 const Skill_1 = require("../models/Skill");
 require("../models/ProjectsTechnologies");
+const ObjectMap_1 = require("../utils/ObjectMap");
 function getProjects() {
     return __awaiter(this, void 0, void 0, function* () {
         return yield Project_1.Project.findAll({
@@ -39,8 +40,9 @@ function createProject(project) {
 exports.createProject = createProject;
 function editProject(id, project) {
     return __awaiter(this, void 0, void 0, function* () {
+        const projectFormatted = (0, ObjectMap_1.ObjectMap)(project);
         const projectToEdit = yield Project_1.Project.findByPk(id);
-        projectToEdit === null || projectToEdit === void 0 ? void 0 : projectToEdit.set(project);
+        projectToEdit === null || projectToEdit === void 0 ? void 0 : projectToEdit.set(projectFormatted);
         yield (projectToEdit === null || projectToEdit === void 0 ? void 0 : projectToEdit.save());
         return projectToEdit;
     });

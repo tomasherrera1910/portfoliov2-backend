@@ -34,13 +34,13 @@ loginRouter.post('/login', ((req, res) => __awaiter(void 0, void 0, void 0, func
         expiresIn: 60 * 60 * 24 * 365
     });
     const { NODE_ENV } = process.env;
-    if (NODE_ENV === 'production' || NODE_ENV === undefined) {
+    if (NODE_ENV === 'production ' || NODE_ENV === undefined) {
         res.cookie('token', token, {
             sameSite: 'none',
             secure: false
         });
     }
-    else if (NODE_ENV === 'development') {
+    else if (NODE_ENV.includes('development')) {
         res.cookie('token', token);
     }
     return res.status(202).json({ token });

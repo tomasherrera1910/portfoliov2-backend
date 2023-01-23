@@ -11,6 +11,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.deleteSkill = exports.editSkill = exports.createSkill = exports.getSkill = exports.getSkills = void 0;
 const Skill_1 = require("../models/Skill");
+const ObjectMap_1 = require("../utils/ObjectMap");
 function getSkills() {
     return __awaiter(this, void 0, void 0, function* () {
         return yield Skill_1.Skill.findAll({});
@@ -31,8 +32,9 @@ function createSkill(skill) {
 exports.createSkill = createSkill;
 function editSkill(id, skill) {
     return __awaiter(this, void 0, void 0, function* () {
+        const skillFormatted = (0, ObjectMap_1.ObjectMap)(skill);
         const skillToEdit = yield Skill_1.Skill.findByPk(id);
-        skillToEdit === null || skillToEdit === void 0 ? void 0 : skillToEdit.set(skill);
+        skillToEdit === null || skillToEdit === void 0 ? void 0 : skillToEdit.set(skillFormatted);
         yield (skillToEdit === null || skillToEdit === void 0 ? void 0 : skillToEdit.save());
         return skillToEdit;
     });
