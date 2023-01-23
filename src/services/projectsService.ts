@@ -2,6 +2,7 @@ import { Project } from '../models/Project'
 import { Skill } from '../models/Skill'
 import '../models/ProjectsTechnologies'
 import { IProject, ProjectNoID } from '../types'
+import { ObjectMap } from '../utils/ObjectMap'
 
 export async function getProjects (): Promise<any> {
   return await Project.findAll({
@@ -22,8 +23,9 @@ export async function createProject (project: ProjectNoID): Promise<any> {
 }
 
 export async function editProject (id: number, project: Partial<IProject>): Promise<any> {
+  const projectFormatted = ObjectMap(project)
   const projectToEdit = await Project.findByPk(id)
-  projectToEdit?.set(project)
+  projectToEdit?.set(projectFormatted)
   await projectToEdit?.save()
   return projectToEdit
 }

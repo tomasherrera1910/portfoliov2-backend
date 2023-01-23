@@ -1,5 +1,6 @@
 import { Skill } from '../models/Skill'
 import { ISkill, SkillNoID } from '../types'
+import { ObjectMap } from '../utils/ObjectMap'
 
 export async function getSkills (): Promise<any> {
   return await Skill.findAll({})
@@ -14,8 +15,9 @@ export async function createSkill (skill: SkillNoID): Promise<any> {
 }
 
 export async function editSkill (id: number, skill: Partial<ISkill>): Promise<any> {
+  const skillFormatted = ObjectMap(skill)
   const skillToEdit = await Skill.findByPk(id)
-  skillToEdit?.set(skill)
+  skillToEdit?.set(skillFormatted)
   await skillToEdit?.save()
   return skillToEdit
 }
