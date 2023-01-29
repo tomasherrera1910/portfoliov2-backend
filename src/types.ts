@@ -2,14 +2,17 @@ export interface IProject {
   id: number
   name: string
   description: string
-  image: string
+  images: ProjectImages
   backendRepo?: string
   frontendRepo?: string
   deployURL: string
   colors: string[]
   technologies: ISkill[]
 }
-
+interface ProjectImages {
+  desktop: string
+  mobile: string
+}
 export type ProjectNoID = Omit<IProject, 'id'>
 
 export interface ISkill {
