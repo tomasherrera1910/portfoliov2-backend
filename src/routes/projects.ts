@@ -22,11 +22,11 @@ projectsRouter.get('/projects/:id', (req, res, next) => {
 })
 // CREATE PROJECT
 projectsRouter.post('/projects', verifyUser, (req, res, next) => {
-  const { name, description, image, backendRepo, frontendRepo, deployURL, colors } = req.body
+  const { name, description, images, backendRepo, frontendRepo, deployURL, colors } = req.body
   createProject({
     name,
     description,
-    image,
+    images,
     backendRepo,
     frontendRepo,
     deployURL,
