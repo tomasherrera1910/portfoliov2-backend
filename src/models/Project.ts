@@ -14,9 +14,10 @@ export const Project = sequelize.define('Project', {
   description: {
     type: DataTypes.STRING
   },
-  image: {
-    type: DataTypes.STRING,
-    allowNull: false
+  images: {
+    type: DataTypes.JSONB,
+    allowNull: false,
+    defaultValue: { mobile: '', desktop: '' }
   },
   colors: {
     type: DataTypes.ARRAY(DataTypes.STRING)
@@ -34,6 +35,6 @@ export const Project = sequelize.define('Project', {
 })
 
 // const syncChanges = async (): Promise<void> => {
-//   await Project.sync()
+//   await Project.sync({ alter: true })
 // }
 // syncChanges().catch(e => console.error(e))
