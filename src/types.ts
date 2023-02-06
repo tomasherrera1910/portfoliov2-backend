@@ -4,7 +4,7 @@ export interface IProject {
   description: string
   images: ProjectImages
   backendRepo?: string
-  frontendRepo?: string
+  frontEndRepo?: string
   deployURL: string
   colors: string[]
   technologies: ISkill[]
