@@ -19,9 +19,10 @@ exports.Project = database_1.default.define('Project', {
     description: {
         type: sequelize_1.DataTypes.STRING
     },
-    image: {
-        type: sequelize_1.DataTypes.STRING,
-        allowNull: false
+    images: {
+        type: sequelize_1.DataTypes.JSONB,
+        allowNull: false,
+        defaultValue: { mobile: '', desktop: '' }
     },
     colors: {
         type: sequelize_1.DataTypes.ARRAY(sequelize_1.DataTypes.STRING)
@@ -38,6 +39,6 @@ exports.Project = database_1.default.define('Project', {
     }
 });
 // const syncChanges = async (): Promise<void> => {
-//   await Project.sync()
+//   await Project.sync({ alter: true })
 // }
 // syncChanges().catch(e => console.error(e))

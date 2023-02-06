@@ -26,13 +26,13 @@ projectsRouter.get('/projects/:id', (req, res, next) => {
 });
 // CREATE PROJECT
 projectsRouter.post('/projects', verifyUser_1.default, (req, res, next) => {
-    const { name, description, image, backendRepo, frontendRepo, deployURL, colors } = req.body;
+    const { name, description, images, backendRepo, frontEndRepo, deployURL, colors } = req.body;
     (0, projectsService_1.createProject)({
         name,
         description,
-        image,
+        images,
         backendRepo,
-        frontendRepo,
+        frontEndRepo,
         deployURL,
         technologies: [],
         colors
